@@ -2,7 +2,12 @@ import requests
 import json 
 import Roster
 
-players = ["34165220", "34165066", "34164817"]  
+players = []
+
+for name in Roster.player_dict:
+    players.append(Roster.player_dict[name]) # appending player id's from roster file to players list
+
+# print(players)
 
 for player_id in players:
     url = f'https://www.thesportsdb.com/api/v1/json/123/lookupplayer.php?id={player_id}'
@@ -15,12 +20,15 @@ for player_id in players:
         name = player["strPlayer"]
         team = player["strTeam"]
         birth = player["dateBorn"]
-        birthplace = player["strBirthLocation"]
+        birthplace = player["strBirthLocation"].replace("\n", "").replace("\t", "").strip()
         height = player["strHeight"]
         weight = player["strWeight"]
+        position = player["strPosition"]
+        id = player["idPlayer"]
 
-        print(f'{name} is a football player for the {team} of the National Football League.' 
-              f' He is {height} tall and weighs {weight}.'
-              f' He was born on {birth} in {birthplace}.')
+        print(f'Player Information: {id}\n'
+              f'Name: {name} | Team: {team} | Position: {position}\n'
+              f'Height: {height[0:10]} | Weight: {weight[0:6]}\n'
+              f'Birth Date: {birth}\nBirth Place: {birthplace}\n')
     else:
         print(f'No data for {player_id}')

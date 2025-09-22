@@ -21,4 +21,4 @@ for players in team_data["player"]:
 
 
 
-print(player_dict)
+# print(player_dict)

@@ -13,4 +13,4 @@ for info in data["teams"]:
     else:
         continue
 
-print(f'Team Name: {teamName}\nTeam ID: {teamID}')
+print(f'Team Name: {teamName} Team ID: {teamID}\n')
