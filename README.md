@@ -29,7 +29,7 @@ team = NFLRoster('Bills')
 team.print_info()
 
 
-<h2>⚠️ Limitations<h2>
+<h2>⚠️ Limitations</h2>
 The free tier of TheSportsDB limits roster requests to 10 players per team.
 To get full rosters, you need a premium key from TheSportsDB.
 
