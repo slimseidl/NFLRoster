@@ -20,6 +20,19 @@ class NFLRoster():
         return teamID
 
         # print(f'Team Name: {teamName} Team ID: {teamID}\n')
+
+    def get_team_name(self):
+        # team = input("Enter the name of a team you'd like to get player information on:\n")
+        url = f'https://www.thesportsdb.com/api/v1/json/123/searchteams.php?t={self.team}'
+        response = requests.get(url)
+        data = response.json()
+
+        teamName = None
+        for info in data["teams"]:
+            if info["strLeague"] == "NFL":
+                teamName = info["strTeam"]
+                break
+        return teamName
         
 
     def get_roster(self):
@@ -44,13 +57,19 @@ class NFLRoster():
         roster = self.get_roster()
 
         for name in roster:
-            players.append(name["idPlayer"]) # appending player id's from roster file to players list
+            players.append(roster[name]) # appending player id's from roster file to players list
         return players
 
         # print(players)
+
     def print_info(self):
-        players = self.get_player_ID()
         
+        players = self.get_player_ID()
+        TeamNames = self.get_team_name()
+
+        print(f'Roster Information for the {TeamNames}\n')
+
+
         for player_id in players:
             url = f'https://www.thesportsdb.com/api/v1/json/123/lookupplayer.php?id={player_id}'
             response = requests.get(url)
