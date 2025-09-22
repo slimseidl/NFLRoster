@@ -1,17 +1,24 @@
 import requests 
 import json 
+import TeamInfo
 # Build a class out of this that calls a team and calls players from that team, then outputs the info from NFLPlayer.py
 
+id = int(TeamInfo.teamID)
 
 # Team Roster id = team id https://www.thesportsdb.com/api/v1/json/123/lookup_all_players.php?id=133604 Philly = 134936
 # Lookup Team using team id https://www.thesportsdb.com/api/v1/json/123/lookupteam.php?id=133604
 
-philly = requests.get('https://www.thesportsdb.com/api/v1/json/123/lookup_all_players.php?id=134936')
-philly_data = philly.json()
-# print(json.dumps(philly_data,indent=2))
+roster = requests.get(f'https://www.thesportsdb.com/api/v1/json/123/lookup_all_players.php?id={id}')
+team_data = roster.json()
+# print(json.dumps(team_data,indent=2))
 
-name_list = ["Saquon Barkley", "A.J. Brown", "Jalen Hurts", "Will Shipley", "Cam Jurgens", "Devonta Smith", "Jalen Carter", "Cooper DeJean"]
+player_dict = {}
 
-for players in philly_data["player"]:
-    if players["strPlayer"] in name_list:
-        print(players["strPlayer"])
+for players in team_data["player"]:
+    name = players["strPlayer"]
+    val = players["idPlayer"]
+    player_dict[name] = val
+
+
+
+print(player_dict)

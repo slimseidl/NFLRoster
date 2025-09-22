@@ -1,5 +1,6 @@
 import requests 
 import json 
+import Roster
 
 players = ["34165220", "34165066", "34164817"]  
 
